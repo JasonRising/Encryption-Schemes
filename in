@@ -1,0 +1,61 @@
+#include "mapped_encryption.h"
+#include "standards.h"
+#include <string.h>
+#include <time.h>
+#include <stdlib.h>
+
+#define PATH_LENGTH 101
+
+char* get_arrow(int i);
+
+int main(void)
+{
+	extern char map[MAP_SIZE];
+	extern char buf[BUF_SIZE];
+	char path[PATH_LENGTH];
+	int ch;
+	int i, flag;
+	FILE* in, *out;
+	flag = 0;
+	
+	if(flag = fill_map(map))
+	{
+		if(gen_ran_map())
+		{
+			printf("Error With Input File. Make sure \"map\" is in same directory.\n");
+		}
+		else
+		{
+			flag = fill_map(map);
+		}
+	}
+	
+	if(flag)
+	{
+		printf("Error: Could not fill map.\n");
+	}
+	else
+	{		
+		path[PATH_LENGTH - 1] = 0;
+		
+		srand(SEED);
+		
+		do
+		{
+			outputMenu(stdout);
+			ch = getchar();
+			flushScreenInput();
+			switch(ch)
+			{
+				case '1':
+					printf("Enter a text (ENTER + ctrl + d):\n");
+					encrypt_file(stdin, stdout, 0);
+					break;
+				case '2':
+					printf("Enter a text (ENTER + ctrl + d):\n");
+					decrypt_file(stdin, stdout, 0);
+					break;
+				case '3':
+					printf("Enter File Path followed: \n");
+					
+					fgets(path, PATH_L
